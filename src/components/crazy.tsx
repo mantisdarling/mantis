@@ -4,22 +4,16 @@ import React from 'react';
 import { Photos, PhotoItem } from './photos';
 
 const Crazy = () => {
-  const sportPhotos: PhotoItem[] = [
-    {
-      src: '/blancmont.JPG',
-      alt: 'Mont Blanc',
-      caption: 'On top of Mont Blanc (me in blue behind)',
-    },
-  ];
-
   return (
-    <div className="mx-auto w-full">
-      <div className="mb-8">
-        <h2 className="text-foreground text-3xl font-semibold md:text-4xl">
-          Mont Blanc (4810m)
+    <div className="mx-auto w-full p-6">
+      <div className="mb-4">
+        <h2 className="text-foreground text-2xl font-semibold md:text-3xl text-primary">
+          Fun Fact
         </h2>
       </div>
-      <Photos photos={sportPhotos} />
+      <p className="text-neutral-400 font-sans text-lg">
+        I once spent 4 days straight debugging a custom memory allocator in C, only to realize I was off-by-one in my pointer arithmetic. That's when I fell in love with Operating Systems.
+      </p>
     </div>
   );
 };

@@ -5,17 +5,14 @@ import Image from 'next/image';
 import React from 'react';
 
 export function Presentation() {
-  // Personal information
   const profile = {
-    name: 'Raphael Giraud',
-    age: '21 years old',
-    location: 'Paris, France',
-    // Add a newline character after the emoji
+    name: 'Mantis',
+    age: 'CS Student',
+    location: 'IIT Madras, India',
     description:
-      "Hey 👋\nI'm Raph also known as Toukoum. I'm a developer specializing in AI at 42 Paris. I'm working at LightOn AI in Paris. I'm passionate about AI, tech, Entrepreneurship and SaaS tech.",
-    src: '/profil-raph.png',
-    fallbackSrc:
-      'https://images.unsplash.com/photo-1610216705422-caa3fcb6d158?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3',
+      "Hey 👋\nI'm Mantis. I go deep. Then I build. I'm a CS student at IIT Madras with a focus on AI, Machine Learning, Operating Systems, and Programming Language Design. My long term goals are to build a custom OS and a programming language from scratch.",
+    src: '', // No image for now
+    fallbackSrc: '',
   };
 
   // Animation variants for text elements
@@ -47,25 +44,14 @@ export function Presentation() {
       <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2">
         {/* Image section */}
         <div className="relative mx-auto aspect-square w-full max-w-sm">
-          <div className="relative h-full w-full overflow-hidden rounded-2xl">
+          <div className="relative h-full w-full overflow-hidden rounded-2xl bg-neutral-900 border border-neutral-800 flex items-center justify-center">
             <motion.div
               initial={{ scale: 0.92, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
-              className="h-full w-full"
+              className="text-neutral-500 font-mono text-sm"
             >
-              <Image
-                src={profile.src}
-                alt={profile.name}
-                width={500}
-                height={500}
-                className="h-full w-full object-cover object-center"
-                onError={(e) => {
-                  // Fallback to placeholder if image fails to load
-                  const target = e.target as HTMLImageElement;
-                  target.src = profile.fallbackSrc;
-                }}
-              />
+              [ Avatar Placeholder ]
             </motion.div>
           </div>
         </div>
@@ -103,7 +89,7 @@ export function Presentation() {
             transition={{ delay: 0.6, duration: 0.5 }}
             className="mt-4 flex flex-wrap gap-2"
           >
-            {['AI', 'Developer', '42 Paris', 'Sport', 'SaaS Builder'].map(
+            {['AI', 'Machine Learning', 'OS Internals', 'Language Design'].map(
               (tag) => (
                 <span
                   key={tag}

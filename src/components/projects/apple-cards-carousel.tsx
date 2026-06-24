@@ -308,6 +308,11 @@ export const BlurImage = ({
   ...rest
 }: ImageProps) => {
   const [isLoading, setLoading] = useState(true);
+  
+  if (!src) {
+    return <div className={cn("bg-neutral-800 absolute inset-0 z-10", className)} />;
+  }
+
   return (
     <Image
       className={cn(

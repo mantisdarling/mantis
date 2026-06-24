@@ -1,14 +1,11 @@
-import { openai } from '@ai-sdk/openai';
+import { groq } from '@ai-sdk/groq';
 import { streamText } from 'ai';
 import { SYSTEM_PROMPT } from './prompt';
 import { getContact } from './tools/getContact';
 import { getCrazy } from './tools/getCrazy';
-import { getInternship } from './tools/getIntership';
 import { getPresentation } from './tools/getPresentation';
 import { getProjects } from './tools/getProjects';
-import { getResume } from './tools/getResume';
 import { getSkills } from './tools/getSkills';
-import { getSports } from './tools/getSport';
 
 export const maxDuration = 30;
 
@@ -36,16 +33,13 @@ export async function POST(req: Request) {
     const tools = {
       getProjects,
       getPresentation,
-      getResume,
       getContact,
       getSkills,
-      getSports,
       getCrazy,
-      getInternship,
     };
 
     const result = streamText({
-      model: openai('gpt-4o-mini'),
+      model: groq('llama3-8b-8192'),
       messages,
       toolCallStreaming: true,
       tools,
