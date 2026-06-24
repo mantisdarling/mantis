@@ -21,7 +21,7 @@ export function Presentation() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: 'easeOut' },
+      transition: { duration: 0.6, ease: 'easeOut' as const },
     },
   };
 
@@ -33,7 +33,7 @@ export function Presentation() {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: 'easeOut',
+        ease: 'easeOut' as const,
         delay: 0.2,
       },
     },
@@ -48,7 +48,7 @@ export function Presentation() {
             <motion.div
               initial={{ scale: 0.92, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] }}
+              transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] as const }}
               className="text-neutral-500 font-mono text-sm"
             >
               [ Avatar Placeholder ]
