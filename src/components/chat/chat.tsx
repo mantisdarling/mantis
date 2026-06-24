@@ -299,7 +299,7 @@ const Chat = () => {
         className="fixed top-0 right-0 left-0 z-50"
         style={{
           background:
-            'linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.95) 30%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0) 100%)',
+            'linear-gradient(to bottom, rgba(10, 10, 10, 1) 0%, rgba(10, 10, 10, 0.95) 30%, rgba(10, 10, 10, 0.8) 50%, rgba(10, 10, 10, 0) 100%)',
         }}
       >
         <div
