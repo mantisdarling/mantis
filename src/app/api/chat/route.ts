@@ -1,4 +1,4 @@
-import { groq } from '@ai-sdk/groq';
+import { google } from '@ai-sdk/google';
 import { streamText } from 'ai';
 import { SYSTEM_PROMPT } from './prompt';
 import { getContact } from './tools/getContact';
@@ -39,7 +39,7 @@ export async function POST(req: Request) {
     };
 
     const result = streamText({
-      model: groq('llama-3.1-8b-instant'),
+      model: google('gemini-1.5-flash'),
       messages,
       toolCallStreaming: true,
       tools,
