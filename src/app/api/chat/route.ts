@@ -44,6 +44,7 @@ export async function POST(req: Request) {
       toolCallStreaming: true,
       tools,
       maxSteps: 2,
+      maxTokens: 400,
     });
 
     return result.toDataStreamResponse({
