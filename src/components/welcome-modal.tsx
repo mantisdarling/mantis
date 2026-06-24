@@ -27,7 +27,7 @@ export default function WelcomeModal({ trigger }: WelcomeModalProps) {
   const defaultTrigger = (
     <Button
       variant="ghost"
-      className="h-auto w-auto cursor-pointer rounded-2xl bg-white/30 p-3 shadow-lg backdrop-blur-lg hover:bg-white/60 focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
+      className="h-auto w-auto cursor-pointer rounded-2xl bg-card/30 p-3 shadow-lg backdrop-blur-lg hover:bg-card/60 focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 border border-border"
       onClick={() => setIsOpen(true)}
     >
       <Image
@@ -78,7 +78,7 @@ export default function WelcomeModal({ trigger }: WelcomeModalProps) {
               <Button
                 variant="ghost"
                 size="icon"
-                className="sticky top-0 right-0 cursor-pointer rounded-full bg-black p-2 text-white hover:bg-black/90 hover:text-white"
+                className="sticky top-0 right-0 cursor-pointer rounded-full bg-background p-2 text-foreground hover:bg-accent/80 hover:text-accent-foreground border border-border"
                 onClick={() => setIsOpen(false)}
               >
                 <X className="h-6 w-6" />

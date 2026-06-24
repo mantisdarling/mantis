@@ -44,12 +44,12 @@ export function Presentation() {
       <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-2">
         {/* Image section */}
         <div className="relative mx-auto aspect-square w-full max-w-sm">
-          <div className="relative h-full w-full overflow-hidden rounded-2xl bg-neutral-900 border border-neutral-800 flex items-center justify-center">
+          <div className="relative h-full w-full overflow-hidden rounded-2xl bg-card border border-border flex items-center justify-center">
             <motion.div
               initial={{ scale: 0.92, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.8, ease: [0.19, 1, 0.22, 1] as const }}
-              className="text-neutral-500 font-mono text-sm"
+              className="text-muted-foreground font-mono text-sm"
             >
               [ Avatar Placeholder ]
             </motion.div>

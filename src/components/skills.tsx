@@ -11,13 +11,13 @@ const Skills = () => {
       category: 'Languages',
       icon: <Code className="h-5 w-5" />,
       skills: ['Python', 'JavaScript', 'TypeScript', 'C'],
-      color: 'bg-blue-50 text-blue-600 border border-blue-200',
+      color: 'bg-primary/10 text-primary border border-primary/20',
     },
     {
       category: 'Frontend Development',
       icon: <PenTool className="h-5 w-5" />,
       skills: ['React', 'Next.js', 'Tailwind CSS'],
-      color: 'bg-emerald-50 text-emerald-600 border border-emerald-200',
+      color: 'bg-primary/10 text-primary border border-primary/20',
     },
     {
       category: 'Core Domains',
@@ -29,7 +29,7 @@ const Skills = () => {
         'Operating Systems Internals',
         'Programming Language Design',
       ],
-      color: 'bg-indigo-50 text-indigo-600 border border-indigo-200',
+      color: 'bg-primary/10 text-primary border border-primary/20',
     },
     {
       category: 'Soft Skills',
@@ -40,7 +40,7 @@ const Skills = () => {
         'Deep observation',
         'Builder mindset',
       ],
-      color: 'bg-amber-50 text-amber-600 border border-amber-200',
+      color: 'bg-primary/10 text-primary border border-primary/20',
     },
   ];
 

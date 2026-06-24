@@ -140,20 +140,19 @@ export default function Home() {
           }}
           className="relative w-full max-w-lg"
         >
-          <div className="mx-auto flex items-center rounded-full border border-neutral-200 bg-white/30 py-2.5 pr-2 pl-6 backdrop-blur-lg transition-all hover:border-neutral-300 dark:border-neutral-700 dark:bg-neutral-800 dark:hover:border-neutral-600">
+          <div className="mx-auto flex items-center rounded-full border border-border bg-card/30 py-2.5 pr-2 pl-6 backdrop-blur-lg transition-all hover:border-primary/50">
             <input
               ref={inputRef}
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask me anything…"
-              className="w-full border-none bg-transparent text-base text-neutral-800 placeholder:text-neutral-500 focus:outline-none dark:text-neutral-200 dark:placeholder:text-neutral-500"
+              className="w-full border-none bg-transparent text-base text-foreground placeholder:text-muted-foreground focus:outline-none"
             />
             <button
               type="submit"
               disabled={!input.trim()}
-              aria-label="Submit question"
-              className="flex items-center justify-center rounded-full bg-[#0171E3] p-2.5 text-white transition-colors hover:bg-blue-600 disabled:opacity-70 dark:bg-blue-600 dark:hover:bg-blue-700"
+              className="flex items-center justify-center rounded-full bg-primary p-2.5 text-primary-foreground transition-colors hover:bg-primary/80 disabled:opacity-70"
             >
               <ArrowRight  className="h-5 w-5" />
             </button>
@@ -167,9 +166,9 @@ export default function Home() {
               key={key}
               onClick={() => goToChat(questions[key])}
               variant="outline"
-              className="border-border hover:bg-border/30 aspect-square w-full cursor-pointer rounded-2xl border bg-white/30 py-8 shadow-none backdrop-blur-lg active:scale-95 md:p-10"
+              className="border-border hover:border-primary/50 hover:bg-accent/10 aspect-square w-full cursor-pointer rounded-2xl border bg-card/30 py-8 shadow-none backdrop-blur-lg active:scale-95 md:p-10 transition-colors"
             >
-              <div className="flex h-full flex-col items-center justify-center gap-1 text-gray-700">
+              <div className="flex h-full flex-col items-center justify-center gap-1 text-muted-foreground hover:text-foreground transition-colors">
                 <Icon size={22} strokeWidth={2} color={color} />
                 <span className="text-xs font-medium sm:text-sm">{key}</span>
               </div>

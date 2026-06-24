@@ -39,7 +39,7 @@ export function FastfolioPopup({ open, onOpenChange, hasReachedLimit = false }: 
             className="h-[200px] w-full object-cover"
           />
           {/*<Badge 
-            className="absolute top-4 right-4 bg-white/90 text-gray-900 backdrop-blur-sm"
+            className="absolute top-4 right-4 bg-card/90 text-foreground backdrop-blur-sm border border-border"
             variant="secondary"
           >
             Join 500+ developers
