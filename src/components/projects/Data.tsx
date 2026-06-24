@@ -4,8 +4,18 @@ import { ChevronRight, Link } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { url } from 'inspector';
 
+// Define interface for project prop
+interface ProjectProps {
+  title: string;
+  description?: string;
+  techStack?: string[];
+  date?: string;
+  links?: { name: string; url: string }[];
+  images?: { src: string; alt: string }[];
+}
+
 // Enhanced project content array with all projects
-const PROJECT_CONTENT = [
+const PROJECT_CONTENT: ProjectProps[] = [
   {
     title: 'Custom OS Kernel',
     description:
@@ -45,15 +55,7 @@ const PROJECT_CONTENT = [
   },
 ];
 
-// Define interface for project prop
-interface ProjectProps {
-  title: string;
-  description?: string;
-  techStack?: string[];
-  date?: string;
-  links?: { name: string; url: string }[];
-  images?: { src: string; alt: string }[];
-}
+
 
 const ProjectContent = ({ project }: { project: ProjectProps }) => {
   // Find the matching project data
