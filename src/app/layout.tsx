@@ -2,7 +2,7 @@ import { Toaster } from '@/components/ui/sonner';
 import { cn } from '@/lib/utils';
 import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
 
@@ -10,6 +10,12 @@ import './globals.css';
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
+});
+
+// Load JetBrains Mono for tags and labels
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
 });
 
 export const metadata: Metadata = {
@@ -63,6 +69,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { CustomCursor } from '@/components/custom-cursor';
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -87,9 +95,11 @@ export default function RootLayout({
       <body
         className={cn(
           'bg-background min-h-screen font-sans antialiased',
-          inter.variable
+          inter.variable,
+          jetbrainsMono.variable
         )}
       >
+        <CustomCursor />
         <main className="flex min-h-screen flex-col">{children}</main>
         <Toaster />
         <Analytics />
