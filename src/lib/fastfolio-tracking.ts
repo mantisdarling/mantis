@@ -5,7 +5,7 @@ const STORAGE_KEYS = {
   RATE_LIMIT_REACHED: 'fastfolio_rate_limit_reached',
 } as const;
 
-const MESSAGE_LIMIT = 4; // Rate limit: 3 messages total
+const MESSAGE_LIMIT = 999999; // Rate limit removed
 
 export class FastfolioTracking {
   static incrementMessageCount(): number {
@@ -36,14 +36,7 @@ export class FastfolioTracking {
   }
   
   static shouldShowPopup(): boolean {
-    if (typeof window === 'undefined') return false;
-    
-    const messageCount = this.getMessageCount();
-    const popupShown = localStorage.getItem(STORAGE_KEYS.POPUP_SHOWN) === 'true';
-    
-    // Show popup after 2 messages OR when rate limit is reached
-    const hasReachedLimit = this.hasReachedLimit();
-    return (messageCount >= 2 && !popupShown) || hasReachedLimit;
+    return false;
   }
   
   static hasReachedLimit(): boolean {
