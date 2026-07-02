@@ -1,13 +1,22 @@
-import { Controller, Post, Body, Headers } from '@nestjs/common';
+import { Controller, Post, Body, Headers, UseGuards, Request } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { EmailService } from '../email/email.service';
+import { PaymentsService } from './payments.service';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('payments')
 export class PaymentsController {
   constructor(
     private readonly prisma: PrismaService,
     private readonly emailService: EmailService,
+    private readonly paymentsService: PaymentsService,
   ) {}
+
+  @UseGuards(JwtAuthGuard)
+  @Post('connect-onboarding')
+  async connectOnboarding(@Request() req) {
+    return this.paymentsService.createConnectAccount(req.user.userId);
+  }
 
   @Post('webhook')
   async handleWebhook(@Body() body: any, @Headers('stripe-signature') signature: string) {
