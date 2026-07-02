@@ -13,6 +13,7 @@ import { BullModule } from '@nestjs/bullmq';
 import { PrometheusModule } from '@willsoto/nestjs-prometheus';
 import { AnalyticsModule } from './analytics/analytics.module';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
+import { EmailModule } from './email/email.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
       ttl: 60000,
       limit: 100,
     }]),
+    EmailModule,
   ],
   controllers: [AppController],
   providers: [
