@@ -1,5 +1,5 @@
 import Navbar from '../../../components/Navbar';
-import Link from 'next/link';
+import PaymentForm from '../../../components/PaymentForm';
 
 export default function CheckoutPage({ params }: { params: { id: string } }) {
   return (
@@ -44,28 +44,7 @@ export default function CheckoutPage({ params }: { params: { id: string } }) {
           {/* Payment Form Placeholder */}
           <div className="glass-panel p-6 rounded-2xl h-fit border-indigo-500/20">
             <h2 className="text-xl font-semibold text-zinc-100 mb-6">Payment Details</h2>
-            
-            <form className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-zinc-300 mb-1">Card Information</label>
-                <div className="w-full bg-zinc-900/50 border border-zinc-800 rounded-lg p-4 text-zinc-400 flex items-center justify-center">
-                  [ Stripe Elements Placeholder ]
-                </div>
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-zinc-300 mb-1">Name on Card</label>
-                <input 
-                  type="text" 
-                  className="w-full bg-zinc-900/50 border border-zinc-800 rounded-lg px-4 py-2 text-zinc-100 focus:outline-none focus:border-indigo-500 transition-colors"
-                  placeholder="Alice Walker"
-                />
-              </div>
-
-              <button type="submit" className="w-full bg-indigo-600 text-white font-bold rounded-xl px-4 py-4 mt-6 hover:bg-indigo-700 transition-colors shadow-[0_0_20px_rgba(79,70,229,0.3)]">
-                Pay $155.00
-              </button>
-            </form>
+            <PaymentForm />
           </div>
         </div>
       </main>
