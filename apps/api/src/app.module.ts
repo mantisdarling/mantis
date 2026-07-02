@@ -10,6 +10,7 @@ import { PaymentsModule } from './payments/payments.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { BullModule } from '@nestjs/bullmq';
 import { PrometheusModule } from '@willsoto/nestjs-prometheus';
+import { AnalyticsModule } from './analytics/analytics.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { PrometheusModule } from '@willsoto/nestjs-prometheus';
         enabled: true,
       },
     }),
+    AnalyticsModule
   ],
   controllers: [AppController],
   providers: [AppService],

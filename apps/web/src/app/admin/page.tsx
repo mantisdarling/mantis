@@ -2,44 +2,56 @@ import Navbar from '../../components/Navbar';
 
 export default function AdminDashboard() {
   return (
-    <div className="min-h-screen bg-zinc-950 flex flex-col">
-      <Navbar />
-      
-      <main className="flex-1 max-w-7xl mx-auto w-full px-6 py-12 animate-fade-in-up">
-        <div className="mb-10">
-          <h1 className="text-3xl font-bold text-zinc-100">Admin Control Panel</h1>
-          <p className="text-zinc-400 mt-2">Manage expert verifications and platform settings.</p>
+    <div className="min-h-screen p-8 animate-fade-in-up">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex items-center justify-between mb-8">
+          <div>
+            <h1 className="text-3xl font-bold text-zinc-100">Admin Command Center</h1>
+            <p className="text-zinc-400 mt-2">Platform analytics and expert verification.</p>
+          </div>
+          <button className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors font-medium shadow-[0_0_15px_rgba(79,70,229,0.3)]">
+            Generate Report
+          </button>
         </div>
-
-        <div className="glass-panel p-8 rounded-2xl">
-          <h2 className="text-xl font-semibold text-zinc-100 border-b border-zinc-800 pb-2 mb-6">Expert Verifications</h2>
-          
-          <table className="w-full text-left">
-            <thead>
-              <tr className="text-zinc-500 text-sm border-b border-zinc-800">
-                <th className="pb-3 font-medium">Name</th>
-                <th className="pb-3 font-medium">Role</th>
-                <th className="pb-3 font-medium">Status</th>
-                <th className="pb-3 font-medium">Action</th>
-              </tr>
-            </thead>
-            <tbody className="text-zinc-300">
-              <tr className="border-b border-zinc-800/50 hover:bg-zinc-900/30">
-                <td className="py-4">Dr. Sarah Chen</td>
-                <td className="py-4 text-sm">Staff ML Engineer</td>
-                <td className="py-4"><span className="px-2 py-1 bg-yellow-500/10 text-yellow-500 text-xs rounded-md">Pending</span></td>
-                <td className="py-4"><button className="px-4 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm transition-colors">Verify</button></td>
-              </tr>
-              <tr className="hover:bg-zinc-900/30">
-                <td className="py-4">Marcus Johnson</td>
-                <td className="py-4 text-sm">Senior Product Designer</td>
-                <td className="py-4"><span className="px-2 py-1 bg-emerald-500/10 text-emerald-500 text-xs rounded-md">Verified</span></td>
-                <td className="py-4"><button className="px-4 py-1.5 border border-red-500/50 text-red-400 hover:bg-red-500/10 rounded-lg text-sm transition-colors">Revoke</button></td>
-              </tr>
-            </tbody>
-          </table>
+        
+        <DashboardCharts />
+        
+        <div className="mt-8 glass-panel p-6 rounded-xl">
+          <h3 className="text-lg font-bold text-zinc-100 mb-6">Pending Expert Verifications</h3>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="border-b border-white/10 text-sm text-zinc-400">
+                  <th className="pb-3 px-4 font-medium">Expert Name</th>
+                  <th className="pb-3 px-4 font-medium">Expertise</th>
+                  <th className="pb-3 px-4 font-medium">Applied Date</th>
+                  <th className="pb-3 px-4 font-medium text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody className="text-sm">
+                <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                  <td className="py-4 px-4 text-zinc-200">Dr. Sarah Chen</td>
+                  <td className="py-4 px-4 text-zinc-400">Machine Learning</td>
+                  <td className="py-4 px-4 text-zinc-400">Oct 24, 2023</td>
+                  <td className="py-4 px-4 text-right space-x-2">
+                    <button className="text-green-400 hover:text-green-300 transition-colors font-medium">Approve</button>
+                    <button className="text-red-400 hover:text-red-300 transition-colors font-medium ml-4">Reject</button>
+                  </td>
+                </tr>
+                <tr className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                  <td className="py-4 px-4 text-zinc-200">James Wilson</td>
+                  <td className="py-4 px-4 text-zinc-400">Frontend Engineering</td>
+                  <td className="py-4 px-4 text-zinc-400">Oct 25, 2023</td>
+                  <td className="py-4 px-4 text-right space-x-2">
+                    <button className="text-green-400 hover:text-green-300 transition-colors font-medium">Approve</button>
+                    <button className="text-red-400 hover:text-red-300 transition-colors font-medium ml-4">Reject</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }
