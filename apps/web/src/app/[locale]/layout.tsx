@@ -12,11 +12,25 @@ export const metadata: Metadata = {
   description: 'MANTIS is a premier mentee-expert marketplace. Book 1-on-1 live sessions with top-tier professionals and supercharge your career.',
   openGraph: {
     title: 'MANTIS - Expert Marketplace',
-    description: 'Stop guessing, start talking. 1-on-1 expert sessions.',
+    description: 'Stop guessing, start talking. Book 1-on-1 expert sessions.',
     url: 'https://mantis.com',
     siteName: 'MANTIS Marketplace',
+    images: [
+      {
+        url: 'https://mantis.com/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'MANTIS Marketplace Preview',
+      },
+    ],
     locale: 'en_US',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'MANTIS - Stop guessing, start talking',
+    description: 'Book 1-on-1 live sessions with top-tier professionals.',
+    images: ['https://mantis.com/twitter-image.jpg'],
   },
 };
 
