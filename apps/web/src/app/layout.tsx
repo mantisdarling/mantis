@@ -6,7 +6,15 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'MANTIS - Stop guessing, start talking',
-  description: 'Connect with vetted experts for 1-on-1 mentorship.',
+  description: 'MANTIS is a premier mentee-expert marketplace. Book 1-on-1 live sessions with top-tier professionals and supercharge your career.',
+  openGraph: {
+    title: 'MANTIS - Expert Marketplace',
+    description: 'Stop guessing, start talking. 1-on-1 expert sessions.',
+    url: 'https://mantis.com',
+    siteName: 'MANTIS Marketplace',
+    locale: 'en_US',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({
