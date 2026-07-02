@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+    - name: Install dependencies
+      run: npm ci
+    - name: Generate Prisma Client
+      run: npm run prisma:generate --workspace=apps/api || echo "Prisma generate skipped"
+    - name: Build Web
+      run: npm run build --workspace=apps/web
+    - name: Build API
+      run: npm run build --workspace=apps/api
