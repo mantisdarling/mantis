@@ -15,6 +15,7 @@ import { AnalyticsModule } from './analytics/analytics.module';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { EmailModule } from './email/email.module';
 import { ReviewsModule } from './reviews/reviews.module';
+import { UploadsModule } from './uploads/uploads.module';
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import { ReviewsModule } from './reviews/reviews.module';
     }]),
     EmailModule,
     ReviewsModule,
+    UploadsModule,
   ],
   controllers: [AppController],
   providers: [
