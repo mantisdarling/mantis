@@ -1,0 +1,175 @@
+openapi: 3.0.0
+info:
+  title: MANTIS API
+  description: Core API for MANTIS mentee-expert marketplace.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/api
+    description: Local Development Server
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+          enum: [LEARNER, EXPERT, ADMIN]
+        timezone:
+          type: string
+          example: "America/New_York"
+          
+    ExpertProfile:
+      type: object
+      properties:
+        user_id:
+          type: string
+          format: uuid
+        bio:
+          type: string
+        skills:
+          type: array
+          items:
+            type: string
+        hourly_rate:
+          type: number
+        rating:
+          type: number
+
+paths:
+  /auth/register:
+    post:
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name, email, password, role, timezone]
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                role:
+                  type: string
+                  enum: [LEARNER, EXPERT]
+                timezone:
+                  type: string
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                  user:
+                    $ref: '#/components/schemas/User'
+
+  /experts:
+    get:
+      summary: Get a list of experts
+      parameters:
+        - in: query
+          name: skill
+          schema:
+            type: string
+          description: Filter by skill tag
+        - in: query
+          name: min_rating
+          schema:
+            type: number
+      responses:
+        '200':
+          description: A list of expert profiles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                    - $ref: '#/components/schemas/User'
+                    - $ref: '#/components/schemas/ExpertProfile'
+
+  /book:
+    post:
+      summary: Book a session with an expert
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [expert_id, slot_id]
+              properties:
+                expert_id:
+                  type: string
+                  format: uuid
+                slot_id:
+                  type: string
+                  format: uuid
+      responses:
+        '200':
+          description: Session booked successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  session_id:
+                    type: string
+                    format: uuid
+                  client_secret:
+                    type: string
+                    description: Stripe payment intent secret
+
+  /sessions/{id}:
+    get:
+      summary: Get session details
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Session details including WebRTC tokens
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  status:
+                    type: string
+                  start_time:
+                    type: string
+                    format: date-time
+                  webrtc_token:
+                    type: string
