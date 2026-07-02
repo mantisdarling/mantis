@@ -9,6 +9,7 @@ import { SessionModule } from './session/session.module';
 import { PaymentsModule } from './payments/payments.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { BullModule } from '@nestjs/bullmq';
+import { PrometheusModule } from '@willsoto/nestjs-prometheus';
 
 @Module({
   imports: [
@@ -24,7 +25,13 @@ import { BullModule } from '@nestjs/bullmq';
         port: 6379,
       },
     }),
-    NotificationsModule
+    NotificationsModule,
+    PrometheusModule.register({
+      path: '/metrics',
+      defaultMetrics: {
+        enabled: true,
+      },
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
