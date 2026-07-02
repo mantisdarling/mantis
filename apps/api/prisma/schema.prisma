@@ -22,6 +22,8 @@ model User {
   messages      Message[]
   paymentsSent  Payment[] @relation("PayerPayments")
   paymentsReceived Payment[] @relation("PayeePayments")
+  reviewsGiven    Review[]  @relation("LearnerReviews")
+  reviewsReceived Review[]  @relation("ExpertReviews")
 }
 
 enum Role {
@@ -66,6 +68,7 @@ model Session {
   
   messages      Message[]
   transcript    Transcript?
+  review        Review?
 }
 
 enum SessionStatus {
@@ -109,4 +112,17 @@ enum PaymentStatus {
   ESCROW
   COMPLETED
   REFUNDED
+}
+
+model Review {
+  id        String   @id @default(uuid()) @db.Uuid
+  sessionId String   @unique @db.Uuid
+  session   Session  @relation(fields: [sessionId], references: [id])
+  learnerId String   @db.Uuid
+  learner   User     @relation("LearnerReviews", fields: [learnerId], references: [id])
+  expertId  String   @db.Uuid
+  expert    User     @relation("ExpertReviews", fields: [expertId], references: [id])
+  rating    Int
+  comment   String?  @db.Text
+  createdAt DateTime @default(now())
 }

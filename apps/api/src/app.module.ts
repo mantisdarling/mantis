@@ -14,6 +14,7 @@ import { PrometheusModule } from '@willsoto/nestjs-prometheus';
 import { AnalyticsModule } from './analytics/analytics.module';
 import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { EmailModule } from './email/email.module';
+import { ReviewsModule } from './reviews/reviews.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { EmailModule } from './email/email.module';
       limit: 100,
     }]),
     EmailModule,
+    ReviewsModule,
   ],
   controllers: [AppController],
   providers: [
