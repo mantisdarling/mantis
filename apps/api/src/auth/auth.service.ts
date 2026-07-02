@@ -39,4 +39,42 @@ export class AuthService {
       }
     };
   }
+
+  async validateOAuthLogin(profile: { email: string; name: string; providerId: string; provider: string }) {
+    let user = await this.usersService.user({ email: profile.email });
+
+    if (!user) {
+      // Create new user if they don't exist
+      user = await this.usersService.createUser({
+        name: profile.name,
+        email: profile.email,
+        passwordHash: null,
+        role: 'LEARNER',
+        timezone: 'UTC',
+      });
+    }
+
+    // Upsert the account mapping
+    const prisma = (this.usersService as any).prisma; // quick hack to access prisma
+    await prisma.account.upsert({
+      where: {
+        provider_providerAccountId: {
+          provider: profile.provider,
+          providerAccountId: profile.providerId,
+        }
+      },
+      update: {},
+      create: {
+        userId: user.id,
+        type: 'oauth',
+        provider: profile.provider,
+        providerAccountId: profile.providerId,
+      }
+    });
+
+    const payload = { sub: user.id, email: user.email, role: user.role };
+    const access_token = await this.jwtService.signAsync(payload);
+    
+    return { ...user, access_token };
+  }
 }
