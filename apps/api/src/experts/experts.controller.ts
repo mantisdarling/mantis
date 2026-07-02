@@ -13,6 +13,11 @@ export class ExpertsController {
     return this.expertsService.findAll(skill, minRating);
   }
 
+  @Get('search')
+  search(@Query('q') query: string) {
+    return this.expertsService.search(query);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.expertsService.findOne(id);

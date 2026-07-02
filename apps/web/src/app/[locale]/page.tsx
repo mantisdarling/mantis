@@ -1,5 +1,4 @@
-import Link from 'next/link';
-import { useTranslations } from 'next-intl';
+import SearchBar from '@/components/SearchBar';
 
 export default function Home() {
   const t = useTranslations('Index');
@@ -47,9 +46,11 @@ export default function Home() {
           </span>
         </h1>
         
-        <p className="mt-6 text-lg md:text-xl text-zinc-400 max-w-2xl">
+        <p className="mt-6 text-lg md:text-xl text-zinc-400 max-w-2xl mb-4">
           {t('subtitle')}
         </p>
+
+        <SearchBar />
         
         <div className="mt-10 flex flex-col sm:flex-row gap-4">
           <Link href="/register?role=LEARNER" className="px-8 py-4 text-base font-medium bg-indigo-600 text-white rounded-full hover:bg-indigo-700 transition-all active:scale-95 shadow-[0_0_40px_rgba(79,70,229,0.3)]">

@@ -33,6 +33,25 @@ export class ExpertsService {
     });
   }
 
+  async search(query: string) {
+    if (!query) return [];
+    
+    return this.prisma.user.findMany({
+      where: {
+        role: 'EXPERT',
+        OR: [
+          { name: { contains: query, mode: 'insensitive' } },
+          { profile: { bio: { contains: query, mode: 'insensitive' } } },
+          { profile: { headline: { contains: query, mode: 'insensitive' } } }
+        ]
+      },
+      include: {
+        profile: true,
+      },
+      take: 10,
+    });
+  }
+
   async findOne(id: string) {
     return this.prisma.user.findFirst({
       where: {
