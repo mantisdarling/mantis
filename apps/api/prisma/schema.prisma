@@ -1,0 +1,113 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String    @id @default(uuid()) @db.Uuid
+  name          String
+  email         String    @unique
+  passwordHash  String
+  role          Role
+  timezone      String
+  createdAt     DateTime  @default(now())
+
+  profile       Profile?
+  slots         BookingSlot[]
+  sessionsAsLearner Session[] @relation("LearnerSessions")
+  sessionsAsExpert Session[] @relation("ExpertSessions")
+  messages      Message[]
+  paymentsSent  Payment[] @relation("PayerPayments")
+  paymentsReceived Payment[] @relation("PayeePayments")
+}
+
+enum Role {
+  LEARNER
+  EXPERT
+  ADMIN
+}
+
+model Profile {
+  id          String   @id @default(uuid()) @db.Uuid
+  userId      String   @unique @db.Uuid
+  user        User     @relation(fields: [userId], references: [id])
+  bio         String?  @db.Text
+  avatarUrl   String?
+  skills      String[]
+  hourlyRate  Float?
+  rating      Float?
+  isVerified  Boolean  @default(false)
+}
+
+model BookingSlot {
+  id              String   @id @default(uuid()) @db.Uuid
+  expertId        String   @db.Uuid
+  expert          User     @relation(fields: [expertId], references: [id])
+  startDatetime   DateTime
+  durationMinutes Int      @default(60)
+  isReserved      Boolean  @default(false)
+  learnerId       String?  @db.Uuid
+}
+
+model Session {
+  id            String   @id @default(uuid()) @db.Uuid
+  learnerId     String   @db.Uuid
+  learner       User     @relation("LearnerSessions", fields: [learnerId], references: [id])
+  expertId      String   @db.Uuid
+  expert        User     @relation("ExpertSessions", fields: [expertId], references: [id])
+  status        SessionStatus @default(SCHEDULED)
+  startTime     DateTime?
+  endTime       DateTime?
+  learnerRating Float?
+  expertRating  Float?
+  
+  messages      Message[]
+  transcript    Transcript?
+}
+
+enum SessionStatus {
+  SCHEDULED
+  ACTIVE
+  COMPLETED
+  CANCELED
+}
+
+model Message {
+  id        String   @id @default(uuid()) @db.Uuid
+  sessionId String   @db.Uuid
+  session   Session  @relation(fields: [sessionId], references: [id])
+  senderId  String   @db.Uuid
+  sender    User     @relation(fields: [senderId], references: [id])
+  content   String   @db.Text
+  createdAt DateTime @default(now())
+}
+
+model Transcript {
+  id        String   @id @default(uuid()) @db.Uuid
+  sessionId String   @unique @db.Uuid
+  session   Session  @relation(fields: [sessionId], references: [id])
+  rawText   String?  @db.Text
+  aiSummary String?  @db.Text
+}
+
+model Payment {
+  id          String   @id @default(uuid()) @db.Uuid
+  payerId     String   @db.Uuid
+  payer       User     @relation("PayerPayments", fields: [payerId], references: [id])
+  payeeId     String   @db.Uuid
+  payee       User     @relation("PayeePayments", fields: [payeeId], references: [id])
+  amount      Decimal
+  status      PaymentStatus @default(PENDING)
+  stripePiId  String?
+}
+
+enum PaymentStatus {
+  PENDING
+  ESCROW
+  COMPLETED
+  REFUNDED
+}
